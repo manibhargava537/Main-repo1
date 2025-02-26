@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title th:remove="all">Template for HTML email with inline image</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Dear <em th:text="${recipientName}" ,/></p></br>
+<p>Thank you for showing interest in us! Please use following token to proceed further</p></br>
+
+<p>This is your email : <em th:text="${email}"/></p></br>
+<p>This is your email verification token : <em th:text="${token}"/></p></br>
+
+<p>
+  Best Regards, <br/>
+  <em>The Hinfinity Group Team</em>
+</p>
+</body>
+</html>

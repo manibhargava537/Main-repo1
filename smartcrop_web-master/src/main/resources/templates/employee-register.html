@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SmartCorp</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+ 
+  
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <link href="assets/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <link href="assets/css/bootstrap-icons.css" th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+  <link href="assets/css/all.min.css" th:href="@{/css/all.min.css}" rel="stylesheet">
+  <link href="assets/css/aos.css" th:href="@{/css/aos.css}" rel="stylesheet">
+  <link href="assets/css/glightbox.min.css" th:href="@{/css/glightbox.min.css}"  rel="stylesheet">
+  <link href="assets/css/swiper-bundle.min.css" th:href="@{/css/swiper-bundle.min.css}" rel="stylesheet">
+
+
+  <link href="assets/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+<script src="https://kit.fontawesome.com/b3be0b1cb8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<section class="register-page employee-page">
+  <div class="register-logo">
+     <img src="assets/img/logo.png" th:src="@{/img/logo.png}" alt="SmartCorp">
+     <h3>Employee Onboarding</h3>
+  </div>
+
+
+    <div class="register-progress">
+    <div class="progress-bar " role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+
+  <div class="employee-form">
+    <form id="employee-form" th:action="@{/employee/register}" th:object = "${employeeModel}" method="POST">
+ <fieldset>
+
+      <div class="form-field">
+        <h2>Employee Registration</h2>
+         <div class="back-to-login">
+          <p>Already have an account?<a href="login.html" th:href="@{/login}"> Login</a> </p>
+        </div>
+        <div class="form-input form-name-input">
+          <label>Full Name<span>*</span> </label>
+          <select name="title" th:field = "*{title}">
+            <option value="Mr">Mr</option>
+            <option value="Ms">Ms</option>
+            <option value="Mrs">Mrs</option>
+          </select>
+          <input type="text" name="name" th:field = "*{firstName}" placeholder="First Name">
+
+          <input type="text" name="last_name" th:field = "*{lastName}" placeholder="Last Name">
+          <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}" />
+          <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}" />
+        </div>
+        <div class="form-input">
+          <label>Gender<span>*</span></label>
+          <select name="gender" th:field = "*{gender}">
+            <option value="0" selected=" " disabled="">--Select--</option>
+
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="na">Prefer Not to Say</option>
+          </select>
+        </div>
+        <div class="form-input">
+          <label>Email<span>*</span></label>
+          <input type="email" name="email" th:field = "*{email}" placeholder="Email ID">
+          <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
+        </div>
+        <div class="form-input contact-input">
+          <label>Contact No.<span>*</span></label>
+          <select>
+            <option>+91</option>
+            <option>+61</option>
+          </select>
+          <input type="number" name="contact" th:field = "*{phoneNumber}" placeholder="Phone No." >
+          <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="error" th:errors="*{phoneNumber}" />
+        </div>
+        <div class="form-input ">
+          <label> Country<span>*</span></label>
+          <select name="country" th:field = "*{country}" >
+            <option value="0" selected=" " disabled="">--Select--</option>
+            <option value="India">India</option>
+          </select>
+          <p th:if="${#fields.hasErrors('country')}" th:errorclass="error" th:errors="*{country}" />
+        </div>
+        <div class="form-input">
+          <label> State<span>*</span></label>
+          <select id="countryState" name="state" th:field = "*{state}" onchange="onCountryStateChanged()">
+          <option value="0" selected=" " disabled="">--Select--</option>
+            <option th:each="stateObj : ${stateDistrictList}"
+                    th:value="${stateObj.state}"th:text="${stateObj.state}">
+            </option>
+          </select>
+          <p th:if="${#fields.hasErrors('state')}" th:errorclass="error" th:errors="*{state}" />
+        </div>
+        
+        <div class="form-input">
+          <label> District<span>*</span></label>
+          <select th:field="*{district}" class="form-control" id="district">
+          </select>
+          <p th:if="${#fields.hasErrors('district')}" th:errorclass="error" th:errors="*{district}" />
+        </div>
+        <div class="form-input">
+          <label> City<span>*</span></label>
+          <select name="city" th:field = "*{city}" >
+            <option value="0" selected=" " disabled="">--Select--</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Secendrabad">Secundrabad</option>
+          </select>
+        </div>
+        
+        <div class="form-input">
+          <label>Pin Code<span>*</span></label>
+          
+          <select name="pincode" th:field = "*{pinCode}" >
+            <option value="0" selected=" " disabled="">--Select--</option>
+            <option value="500081">500081</option>
+            <option value="500082">500082</option>
+          </select>
+          <p th:if="${#fields.hasErrors('pinCode')}" th:errorclass="error" th:errors="*{pinCode}" />
+        </div>
+        
+
+         <div class="form-input">
+          <label> Designation<span>*</span></label>
+          <select name="designation" th:field = "*{designation}" >
+            <option value="0" selected=" " disabled="">--Select--</option>
+            <option value="Area Manager">Area Manager</option>
+            <option value="Data Quality Check Officer">Data Quality Check Officer</option>
+            <option value="Cluster Officer">Cluster Officer</option>
+          </select>
+           <p th:if="${#fields.hasErrors('designation')}" th:errorclass="error" th:errors="*{designation}" />
+        </div>
+        <div class="form-input content-field">
+          <button>Upload Photo</button>
+            <button>Take a Photo</button>
+        </div>
+         </div>
+         <div class="content-field">
+           
+           <img src="assets/img/SmartCrop-Employee-Onboard.png" th:src="@{/img/SmartCrop-Employee-Onboard.png}" style="border-radius: 15px;max-width: 80%;margin:auto;">
+           
+         </div>
+       <button class="next action-button" type="submit"   style="clear: both;float: left;">Submit <i class="fa-solid fa-chevron-right"></i></button>
+<!-- data-bs-toggle="modal"  data-bs-target="#submit-draft"  -->
+
+
+
+ </fieldset>
+    <fieldset>
+      <div class="error-msg alert alert-danger" style="position:absolute" th:if="${#fields.hasAnyErrors()}">
+        <p>Errors in the form, please re-enter the correct details.</p>
+      </div>
+
+<!--      <div class="success-msg">-->
+<!--        <h3>Thanks for signing up. Welcome to our community. We are happy to have you on board.</h3>-->
+<!--        <a href="login.html">Login</a>-->
+<!--      </div>-->
+    </fieldset>
+    </form>
+  </div>
+ 
+  
+
+</section>
+<div th:if="${employeeAdded != null && employeeAdded}" class="modal fade" id="employeeAdded-draft" tabindex="-1" aria-labelledby="save-draft" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><img src="assets/img/logo.png" th:src="@{/img/logo.png}" alt="SmartCorp"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="assets/img/success.png" th:src="@{/img/success.png}" alt="SmartCorp">
+        <h4>Your Application has been registered successfully. A default password sent to employee email!</h4>
+        <p>click here to all employees <a th:href="@{/employee/all}">All Employees</a></p>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+ <!--  <div id="preloader"></div> -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<script src="assets/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script src="assets/js/aos.js" th:src="@{/js/aos.js}"></script>
+<script src="assets/js/glightbox.min.js" th:src="@{/js/glightbox.min.js}"></script>
+<script src="assets/js/isotope.pkgd.min.js" th:src="@{/js/isotope.pkgd.min.js}"></script>
+<script src="assets/js/swiper-bundle.min.js" th:src="@{/js/swiper-bundle.min.js}"></script>
+<script src="assets/js/purecounter_vanilla.js" th:src="@{/js/purecounter_vanilla.js}"></script>
+
+
+<script src="assets/js/main.js" th:src="@{/js/main.js}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script th:inline="javascript">
+
+$(window).on('load', function(){
+
+    checkIfEmployeeRegistrationComplete();
+    onCountryStateChanged();
+});
+
+checkIfEmployeeRegistrationComplete = function() {
+    let employeeAdded = "[[${employeeAdded}]]";
+    if(employeeAdded && employeeAdded !== "null") {
+        console.log("employee added successfully");
+         $('#employeeAdded-draft').modal('show');
+      }
+ };
+ onCountryStateChanged = function() {
+      let stateSelected = $("#countryState").val();
+      let stateDistrictList = /*[[${stateDistrictList}]]*/ {};
+      $("#district").empty();
+      let firstOption = "<option value='0' selected=' ' disabled=''>--Select--</option>";
+      $("#district").append(firstOption);
+      $.each(stateDistrictList,(i, item)=>{
+        if(item.state === stateSelected) {
+        let distList = item.districts;
+        $.each(distList,(j,district) => {
+          let option = "<option value = " + district + ">" + district +  "</option>";
+            $("#district").append(option);
+        });
+      }
+     });
+ };
+  $('#employee-form').validate({
+    rules:{
+      name:{
+          required:true
+        
+      },
+      gender:"required",
+      email:{
+        required:true,
+        email:true
+      },
+      contact:{
+        required:true,
+        minlength:10,
+        maxlength:10,
+        digits: true,
+      },
+      pincode:{
+        required:true
+        
+      },
+      
+      state:"required",
+      district:"required",
+      city:"required",
+      country:"required",
+
+      designation:"required"
+
+    },
+    messages:{
+
+    }
+
+
+
+
+  });
+
+ 
+
+
+</script>
+
+<!--  <script type="text/javascript">
+    jQuery(document).ready(function(){
+
+var current_fs, next_fs, previous_fs; //fieldsets
+var opacity;
+var current = 1;
+var steps = jQuery("fieldset").length;
+
+setProgressBar(current);
+
+jQuery(".next").click(function(){
+
+current_fs = jQuery(this).parent();
+next_fs = jQuery(this).parent().next();
+
+//Add Class Active
+jQuery("#progressbar li").eq(jQuery("fieldset").index(next_fs)).addClass("active");
+
+//show the next fieldset
+next_fs.show();
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+ opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+next_fs.css({'opacity': opacity});
+},
+duration: 500
+});
+setProgressBar(++current);
+});
+
+jQuery(".previous").click(function(){
+
+current_fs = jQuery(this).parent();
+previous_fs = jQuery(this).parent().prev();
+
+//Remove class active
+jQuery("#progressbar li").eq(jQuery("fieldset").index(current_fs)).removeClass("active");
+
+//show the previous fieldset
+previous_fs.show();
+
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+ opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+previous_fs.css({'opacity': opacity});
+},
+duration: 500
+});
+setProgressBar(--current);
+});
+
+function setProgressBar(curStep){
+var percent = parseFloat(100 / steps) * curStep;
+percent = percent.toFixed();
+jQuery(".progress-bar")
+.css("width",percent+"%")
+}
+
+jQuery(".submit").click(function(){
+return false;
+})
+
+});
+  </script> -->   
+
+</body>
+
+</html>

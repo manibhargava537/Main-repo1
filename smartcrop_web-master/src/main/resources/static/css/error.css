@@ -1,0 +1,10 @@
+body {
+    margin : 0 auto;
+}
+.main-error-page {
+   margin : 150px auto auto auto;
+   width : 50%;
+}
+.flex-container {
+  display: flex;
+ }

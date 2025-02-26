@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Dear <em th:text="${recipientName}" ,/></p></br>
+<p> User with name: <em th:text="${userName}"/> and email: <em th:text="${email}"/>wants to register with us.</p></br>
+
+<a th:href="@{${userProfileLink}}">Click here to view profile and approve/reject</a></br></br>
+<p>You've received this automatically generated email because you're a registered
+    <b>Hinfinity Group</b> user.</p>
+<p>
+    Regards, <br/>
+    <em>The Hinfinity Group Team</em>
+</p>
+</body>
+</html>

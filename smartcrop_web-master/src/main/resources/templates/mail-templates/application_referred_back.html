@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Dear <em th:text="${recipientName}" ,/></p></br>
+<p>Thank you for registering, we appreciate your interest in our product. As of now your account has been put on hold
+    due to the lack of the following information/the following info is not valid.</p><br>
+<p>Reason: <em th:text="${comment}"/></p>
+
+<p>Request you to check with the same and re-register
+    If you have any questions feel free to contact us.
+    We wish you all the best in your future endeavors</p>
+
+<p>
+    Best Regards, <br/>
+    <em>The Hinfinity Group Team</em>
+</p>
+</body>
+</html>

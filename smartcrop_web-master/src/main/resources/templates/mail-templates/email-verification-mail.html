@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Dear <em th:text="${recipientName}" ,/></p></br>
+<p>Thank you for registering with us! To ensure the security of your account, please set a strong and unique password
+    below. Your password should be at least 8 characters long and contain a mix of uppercase and lowercase letters,
+    numbers, and symbols.</p></br>
+
+<p>This is your email : <em th:text="${email}"/></p></br>
+<p>This is your generated userId: <em th:text="${userId}"/></p></br>
+<a th:href="@{${confirmationLink}}">Click here to confirm your email</a></br></br>
+
+<p>
+    Best Regards, <br/>
+    <em>The Hinfinity Group Team</em>
+</p>
+</body>
+</html>

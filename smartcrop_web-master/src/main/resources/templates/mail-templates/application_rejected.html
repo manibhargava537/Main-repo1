@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Dear <em th:text="${recipientName}" ,/></p></br>
+<p> Thank you for registering, we appreciate your interest in our services. Unfortunately, after reviewing your
+    application, we regret to inform you that we are unable to approve your registration at this time.
+    If you have any questions about why your registration was declined or would like to discuss this further, please
+    don't hesitate to contact us. </p></br>
+<p>Reason: <em th:text="${comment}"/></p>
+
+<p>We wish you all the best in your future endeavors.</p>
+<p>
+    Best Regards, <br/>
+    <em>The Hinfinity Group Team</em>
+</p>
+</body>
+</html>

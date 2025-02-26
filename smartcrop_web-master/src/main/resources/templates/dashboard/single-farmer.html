@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Farmer Detail - Smartcrop</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" th:href="@{/img/favicon.png}" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+          th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" th:href="@{/vendor/boxicons/css/boxicons.min.css}"
+          rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" th:href="@{/vendor/quill/quill.snow.css}" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" th:href="@{/vendor/quill/quill.bubble.css}" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" th:href="@{/vendor/simple-datatables/style.css}"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" th:href="@{/css/dashboard/style.css}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Mar 09 2023 with Bootstrap v5.2.3
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo-s.png" th:src="@{/img/dashboard/logo-s.png}" alt="">
+
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="assets/img/profile-img.jpg" th:src="@{/img/profile-img.jpg}" alt="Profile"
+                         class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2" sec:authentication="principal.username"></span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6 sec:authentication="principal.username"></h6>
+                        <span>Cluster Officer</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="index.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Registration </span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                <li>
+                    <a th:href="@{/dashboard/user/all}" method="GET">
+                        <i class="bi bi-circle"><span>View List</span></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Registration </span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                <li>
+                    <a th:href="@{/dashboard/user/all}" method="GET">
+                        <i class="bi bi-circle"></i><span>View List</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li><!-- End Forms Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav1" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Employees </span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="add-employee.html">
+                        <i class="bi bi-circle"></i><span>Add New</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/dashboard/employee/all}" method="GET">
+                        <i class="bi bi-circle"></i><span>View List</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li><!-- End Forms Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Farmers</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/farmer/registerFarmer}" target="_blank">
+                        <i class="bi bi-circle"></i><span>Add New</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/dashboard/farmer/all}" method="GET">
+                        <i class="bi bi-circle"></i><span>View List</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li><!-- End Components Nav -->
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Nursery </span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="https://hinfinity.dev/smartcrop/register.html" target="_blank">
+                        <i class="bi bi-circle"></i><span>Add New</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="nursery-list.html">
+                        <i class="bi bi-circle"></i><span>View List</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
+
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Farmer Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+
+                <li class="breadcrumb-item active">Farmer Detail</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">
+                                    Overview
+                                </button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
+                                    Profile
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit1">Current
+                                    Crop
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit2">Oil Palm
+                                    Details
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit3">Irrigation
+                                    Details
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit4">Bank
+                                    Details
+                                </button>
+                            </li>
+
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+
+                                <h5 class="card-title">Profile Details</h5>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Title</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.title}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">First Name</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.firstName}"/></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Last Name</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.lastName}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.gender}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email Address</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.email}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Phone No.</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.phoneNumber}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Country</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.country}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">State</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.state}"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">District/City</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.districtOrCity}"/></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Zip Code</div>
+                                    <div class="col-lg-9 col-md-8"><em th:text="${farmer.zipCode}"/></div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <!-- Profile Edit Form -->
+                                <form class="single-employee-edit" th:action="@{/farmer/update/__${farmerEntityId}__}"
+                                      th:object="${registrationModel}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
+                                            Image</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <img src="assets/img/profile-img.jpg"
+                                                 th:src="@{/img/dashboard/profile-img.jpg}" alt="Profile">
+                                            <div class="pt-2">
+                                                <a href="#" class="btn btn-primary btn-sm"
+                                                   title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                                <a href="#" class="btn btn-danger btn-sm"
+                                                   title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Title<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" id="valid1" required th:field="*{title}">
+                                                <option value="Mr">Mr</option>
+                                                <option value="Ms">Ms</option>
+                                                <option value="Mrs">Mrs</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First Name<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="firstName" type="text" class="form-control" id="firstName"
+                                                   th:field="*{firstName}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Last Name<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="lastName" type="text" class="form-control" id="lastName"
+                                                   th:field="*{lastName}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label for="company" class="col-md-4 col-lg-3 col-form-label">Gender<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" name="company" th:field="*{gender}">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Prefer Not to Say">Prefer Not to Say</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="email" type="email" class="form-control" id="Email"
+                                                   th:field="*{email}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="phone" type="text" class="form-control" id="Phone"
+                                                   th:field="*{phoneNumber}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select id="country" name="country" class="select2" required th:field="*{country}"
+                                                    onchange="loadStates()">
+                                                <option value="" selected="">Select</option>
+                                                <option th:each="country : ${countries}"
+                                                        th:value="${country.id}" th:text="${country.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">State<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="select2" id="state" name="state" th:field="*{state}" onchange="loadDistricts()">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">District /
+                                            City</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="select2" id="district" name="district" th:field="*{districtOrCity}"
+                                                    onchange="loadMandals()">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Mandal<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="select2" id="mandal" name="mandal" th:field="*{mandal}"
+                                                    onchange="loadVillages()">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Village<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="select2" id="village" th:field="*{village}">
+                                                <option selected value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Zip Code<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" name="zip" id="zip" th:field="*{zipCode}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Status</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select" th:field="*{status}">
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit1">
+                                <form class="single-employee-edit" th:action="@{/farmer/update/__${farmerEntityId}__}"
+                                      th:object="${registrationModel}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Survey Numbers<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="" type="text" class="form-control" th:field="*{surveyNos}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Name of the Crop grown<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="form-select select2" th:field="*{currentCrop}">
+                                                <option value="Paddy">Paddy</option>
+                                                <option value="Turmeric">Turmeric</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Total Land Holding<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="" type="number" class="form-control"
+                                                   th:field="*{totalLandHolding}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Net Income<span class="astrick">*</span>
+                                        </label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="" type="number" class="form-control" th:field="*{netIncome}">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit2">
+                                <form class="single-employee-edit" th:action="@{/farmer/update/__${farmerEntityId}__}"
+                                      th:object="${registrationModel}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Survey Number<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" th:field="*{proposedAreaSurveyNos}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Proposed Area<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" class="form-control" th:field="*{proposedArea}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Method of Plantation<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select class="select2 plantation" th:field="*{plantationType}">
+                                                <option selected value="">Select</option>
+                                                <option value="square">Square</option>
+                                                <option value="triangle">Triangle</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">No of Plants per Acre<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="number" class="form-control"
+                                                   th:field="*{numberOfPlantsPerAcre}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-3 col-form-label">Total Oil Palm Plants<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="number" class="form-control" th:field="*{totalPlants}">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit3">
+                                <form class="single-employee-edit" th:action="@{/farmer/update/__${farmerEntityId}__}"
+                                      th:object="${registrationModel}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Water Source<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <select class="form-select select2" th:field="*{waterSource}">
+                                                <option value="">Select</option>
+                                                <option value="Bore Well">Bore Well</option>
+                                                <option value="Open Well">Open Well</option>
+                                                <option value="Canal">Canal</option>
+                                                <option value="Tank">Tank</option>
+                                                <option value="River">River</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4 col-form-label">Borewell wise Discharge in
+                                            LPH<span class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{normalDischarge}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Discharge during summer
+                                            months<span class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{summerDischarge}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Borewell location<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{location}">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit4">
+                                <form class="single-employee-edit" th:action="@{/farmer/update/__${farmerEntityId}__}"
+                                      th:object="${registrationModel}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Bank Name<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{bankName}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Account Number<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="number" class="form-control" th:field="*{accountNumber}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">Branch Name<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{branchName}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-md-4 col-lg-4  col-form-label">IFSC Code<span
+                                                class="astrick">*</span></label>
+                                        <div class="col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" th:field="*{ifscCode}">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-3">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column">
+                        <h5 class="card-title" style="text-align: left;padding-top: 10px;">Uploaded Document</h5>
+                        <!--<img src="assets/img/profile-img.jpg" alt="Profile" style="max-width: 63%;">
+                        <h2 style="font-size: 18px;font-weight: 500;color: #012970;margin-bottom: 18px;">User Image</h2>
+                        <img src="assets/img/news-1.jpg" alt="Profile" style="max-width: 63%;">
+                        <h2 style="font-size: 18px;font-weight: 500;color: #012970;margin-bottom: 18px;">National ID (front)</h2>
+                        <img src="assets/img/news-1.jpg" alt="Profile" style="max-width: 63%;">
+                        <h2 style="font-size: 18px;font-weight: 500;color: #012970;margin-bottom: 18px;">National ID (back)</h2> -->
+                        <script th:inline="javascript">
+                    let currentUserId = /*[[${farmerEntityId}]]*/ {};
+                    let currentUserType = 'farmer';
+                </script>
+                        <!-- make sure documentType is matching with Enum def in the backend-->
+                        <a href="#" class="loadFile" id="profileDoc" documentType="profile">Click to View Profile picture</a>
+                        <a href="#" class="loadFile" id="identityDoc" documentType="identity">Click to View ID Document</a>
+                        <a href="#" class="loadFile" id="ppbDoc" documentType="ppb">Click to View PPB Document</a>
+                        <a href="#" class="loadFile" id="aadharDoc" documentType="aadhar">Click to View Aadhar Document</a>
+                        <a href="#" class="loadFile" id="bankDetailsDoc" documentType="bank_details">Click to View Bank Details Document</a>
+                    </div>
+                </div>
+                <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="fileModalLabel">File Preview</h5>
+                                <!--                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                <!--                              <span aria-hidden="true">&times;</span>-->
+                                <!--                          </button>-->
+                            </div>
+                            <div class="modal-body">
+                                <div id="filePreview">
+                                    <!--                              <img id="previewImage" class="img-fluid">-->
+                                    <!--                              <embed id="previewPdf" type="application/pdf" width='100%' height='600px'>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div style="display: flex;flex-wrap: wrap;justify-content: space-between;border-top: 1px solid rgba(255, 255, 255, 0.15);padding: 0px 15px;">
+        <div>
+            <div class="copyright">
+                © Copyright <strong><span>SmartCorp</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits" style="text-align:left;">
+
+                Designed by <a href="#">Hinfinity Group</a>
+            </div>
+        </div>
+        <div>
+            <p style="margin-bottom: 0px;">Powered By <img src="assets/img/logo-transparent.png"
+                                                           th:src="@{/img/logo-transparent.png}"
+                                                           style="width: 50px;margin-left: 5px;"></p>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js" th:src="@{/vendor/apexcharts/apexcharts.min.js}"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
+        th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="assets/vendor/chart.js/chart.umd.js" th:src="@{/vendor/chart.js/chart.umd.js}"></script>
+<script src="assets/vendor/echarts/echarts.min.js" th:src="@{/vendor/echarts/echarts.min.js}"></script>
+<script src="assets/vendor/quill/quill.min.js" th:src="@{/vendor/quill/quill.min.js}"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"
+        th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js" th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+<script src="assets/vendor/php-email-form/validate.js" th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js" th:src="@{/js/dashboard/main.js}"></script>
+<script th:inline="javascript">
+        var stateDistrictList = /*[[${stateDistrictList}]]*/ {};
+
+
+</script>
+<script src="assets/js/file-preview.js" th:src="@{/js/file-preview.js}"></script>
+<script type="text/javascript " src="assets/js/registration.js" th:src="@{/js/registration.js}"></script>
+<script>
+    $(document).ready(function() {
+    $('.select2').select2();
+});
+
+function loadStates(){
+    var countryId = $("#country").val();
+    $("#state").empty();
+    $("#district").empty();
+    $("#mandal").empty();
+    $("#village").empty();
+
+    if(countryId !== ""){
+        $.get("/dropdown/states?countryId="+countryId, function(data){
+         $("#state").append("<option value=''>Select</option>");
+            $.each(data, function(index, state) {
+                $("#state").append("<option value='"+state.id+"'+>"+state.name+"</option>")
+            });
+        });
+    }
+}
+
+function loadDistricts(){
+    var stateId = $("#state").val();
+    $("#district").empty();
+    $("#mandal").empty();
+    $("#village").empty();
+
+    if(stateId !== ""){
+        $.get("/dropdown/districts?stateId="+stateId, function(data){
+        if(data.length === 0){
+                 $('.zip').fadeIn();
+                  $('.district').fadeOut();
+                 $('.mandal').fadeOut();
+                 $('.village').fadeOut();
+            }
+             $("#district").append("<option value=''>Select</option>");
+            $.each(data, function(index, district) {
+                $("#district").append("<option value='"+district.id+"'+>"+district.name+"</option>");
+            });
+        });
+    }
+}
+
+function loadMandals(){
+    var districtId = $("#district").val();
+     $("#mandal").empty();
+     $("#village").empty();
+
+    if(districtId !== ""){
+        $.get("/dropdown/mandals?districtId="+districtId, function(data){
+            if(data.length === 0){
+                 $('.zip').fadeIn();
+                 $('.mandal').fadeOut();
+                 $('.village').fadeOut();
+            }
+             $("#mandal").append("<option value=''>Select</option>");
+            $.each(data, function(index, mandal) {
+                $("#mandal").append("<option value='"+mandal.id+"'+>"+mandal.name+"</option>")
+            });
+        });
+    }
+}
+
+function loadVillages(){
+    var mandalId = $("#mandal").val();
+    $("#village").empty();
+
+    if(mandalId !== ""){
+        $.get("/dropdown/villages?mandalId="+mandalId, function(data){
+            if(data.length === 0){
+                $('.zip').fadeIn();
+                $('.village').fadeOut();
+            }
+             $("#village").append("<option value=''>Select</option>");
+            $.each(data, function(index, village) {
+                $("#village").append("<option value='"+village.id+"'+>"+village.name+"</option>")
+            });
+        });
+    }
+}
+
+
+</script>
+
+</body>
+
+</html>
