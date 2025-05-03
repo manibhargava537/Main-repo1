@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Add your build commands here, for example:
+                // sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add your test commands here, for example:
+                // sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Add your deploy commands here, for example:
+                // sh 'scp target/*.jar user@server:/path/to/deploy'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up...'
+            // Add any cleanup commands here, for example:
+            // sh 'rm -rf target'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+  
